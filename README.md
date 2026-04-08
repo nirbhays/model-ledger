@@ -176,6 +176,73 @@ ruff check src/ tests/
 mypy src/
 ```
 
+
+## Why ModelLedger?
+
+The EU AI Act and NIST AI RMF require auditable records of:
+- What data trained each model
+- Which code version produced it
+- How it was evaluated
+- What risks were identified
+
+Most teams track this in spreadsheets or not at all. Audits become expensive, retroactive scrambles.
+
+ModelLedger generates compliance reports from structured JSON — one command, audit-ready output.
+
+## Installation
+
+```bash
+pip install modelledger
+```
+
+## Quick Start
+
+```bash
+# Generate a sample compliance report instantly
+modelledger report --sample
+
+# Report from your own data
+modelledger report --data project_data.json --framework eu-ai-act
+
+# Inspect model lineage
+modelledger inspect --data project_data.json
+```
+
+## Sample Output
+
+```
+ModelLedger Compliance Report
+Framework: EU AI Act
+Generated: 2025-04-07
+
+Model: customer-churn-v2
+Training Data: customer_dataset_v3 (SHA: a8f3c9...)
+Code Version: git:abc1234
+Evaluation: F1=0.91, AUC=0.94
+Risk Level: Limited Risk (Article 6)
+
+Control Status:
+✅ Data provenance documented
+✅ Model version tracked  
+✅ Evaluation recorded
+⚠️  Human oversight mechanism — incomplete
+❌  Post-market monitoring plan — missing
+```
+
+## Compliance Frameworks
+
+| Framework | Status |
+|---|---|
+| EU AI Act | ✅ Full mapping |
+| NIST AI RMF | ✅ Full mapping |
+| ISO 42001 | 🔨 In progress |
+
+## Project Links
+
+- 📋 [Roadmap](ROADMAP.md)
+- 🤝 [Contributing](CONTRIBUTING.md)
+- 🐛 [Issues](https://github.com/nirbhays/model-ledger/issues)
+
 ## License
 
 MIT. See [LICENSE](LICENSE).
